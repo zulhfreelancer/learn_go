@@ -3,9 +3,15 @@ package main
 import "fmt"
 
 func main() {
-  card := newCard()
+  // {} means it's a slice (an array that can shrink/grow)
+  cards := []string{"Ace of Diamonds", newCard()}
 
-  fmt.Println(card)
+  // pushing a new card into the slice
+  cards = append(cards, "Six of Spades")
+
+  for i, card := range cards {
+    fmt.Println(i, card)
+  }
 }
 
 func newCard() string {

@@ -7,6 +7,23 @@ import "fmt"
 // here into 'deck' class. Note: Go doesn't has class.
 type deck []string
 
+func newDeck() deck {
+  cards := deck{}
+
+  cardSuits := []string{"Spades", "Diamonds", "Hearts", "Clubs"}
+  cardValues := []string{"Ace", "Two", "Three", "Four"}
+
+  // The '_' tells Go that we know there is something at that place
+  // but we don't care or don't want to use it. In this case, '_' is index.
+  for _, suit := range cardSuits {
+    for _, value := range cardValues {
+      cards = append(cards, value + " of " + suit)
+    }
+  }
+
+  return cards
+}
+
 // Create receiver with 'print' as the name.
 // Any variables of type 'deck' in our project will get access
 // to this 'print' method.

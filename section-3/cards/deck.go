@@ -34,3 +34,10 @@ func (self deck) print() {
     fmt.Println(i, card)
   }
 }
+
+// This function returns 2 values and they are both 'deck' type.
+func deal(d deck, handSize int) (deck, deck) {
+  // First part takes from first element up to 'handSize' EXCLUDING 'handSize'.
+  // Second part takes from 'handSize' to the last element.
+  return d[:handSize], d[handSize:]
+}

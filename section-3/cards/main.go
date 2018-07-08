@@ -3,6 +3,16 @@ package main
 // import "fmt"
 
 func main() {
-  cards := newDeck()
-  cards.saveToFile("myCards.txt")
+  /* -----------------
+  * Save to disk
+  ----------------- */
+  // cards := newDeck()
+  // cards.saveToFile("myCards.txt")
+
+
+  /* -----------------
+  * Read from disk
+  ----------------- */
+  cards := newDeckFromFile("myCards.txt")
+  cards.print()
 }

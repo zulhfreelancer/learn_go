@@ -4,6 +4,7 @@ import (
   "fmt"
   "strings"
   "io/ioutil"
+  "os"
 )
 
 // Create a new type of 'deck' which is a slice of strings.
@@ -63,4 +64,21 @@ func (d deck) saveToFile(filename string) error {
   sliceOfBytes := []byte(deckInString)
   // we 'return' here so that it will return 'error' (if we get one)
   return ioutil.WriteFile(filename, sliceOfBytes, 0666)
+}
+
+// Read from a file on the disk.
+func newDeckFromFile(filename string) deck {
+  sliceOfBytes, err := ioutil.ReadFile(filename)
+
+  if err != nil {
+    fmt.Println("Error:", err)
+    os.Exit(1) // non-zero means exit and the task was not successful
+  }
+
+  // convert slice of bytes to string
+  byteSliceInString := string(sliceOfBytes)
+  // remove the comma separators in the string
+  cleanedString := strings.Split(byteSliceInString, ",")
+  // convert string to deck (slice of strings)
+  return deck(cleanedString)
 }

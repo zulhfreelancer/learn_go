@@ -5,6 +5,8 @@ import (
   "strings"
   "io/ioutil"
   "os"
+  "math/rand"
+  "time"
 )
 
 // Create a new type of 'deck' which is a slice of strings.
@@ -81,4 +83,25 @@ func newDeckFromFile(filename string) deck {
   cleanedString := strings.Split(byteSliceInString, ",")
   // convert string to deck (slice of strings)
   return deck(cleanedString)
+}
+
+// Randomize cards.
+// Go 'rand#Intn' always starts with same source/seed.
+// That means, the randomizer function always returns same number.
+// If we change the source/seed, we will get different number.
+// So here, we are relying on program's 'start at' time as the source/seed.
+func (d deck) shuffle() {
+  // everytime we start our Go program, we will different time
+  unixNano := time.Now().UnixNano()
+  // create a Rand source with 'unixNano' as the seed
+  source := rand.NewSource(unixNano)
+  // create a Rand object with that source
+  r := rand.New(source)
+
+  for i := range d {
+    // generate a random number from 0 to end of slice (length - 1)
+    newPosition := r.Intn(len(d) - 1)
+    // for EACH iteration, swap the position of 'i' and 'newPosition'
+    d[i], d[newPosition] = d[newPosition], d[i]
+  }
 }

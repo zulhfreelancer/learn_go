@@ -2,19 +2,26 @@ package main
 
 import "fmt"
 
+type contactInfo struct {
+  email string
+  zipCode int
+}
+
 type person struct {
   firstName string
   lastName string
+  contact contactInfo
 }
 
 func main() {
-  var alex person
-  alex.firstName = "Alex"
-  alex.lastName = "Anderson"
+  jim := person{
+    firstName: "Jim",
+    lastName: "Party",
+    contact: contactInfo{
+      email: "jim@gmail.com",
+      zipCode: 12345, // important to put comma here
+    }, // important to put comma here
+  }
 
-  // will show {} if we didn't set the firstName and lastName
-  fmt.Println(alex)
-
-  // will show {firstName: lastName:} if we didn't set them
-  fmt.Printf("%+v", alex)
+  fmt.Printf("%+v", jim)
 }

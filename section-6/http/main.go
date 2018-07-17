@@ -2,6 +2,7 @@ package main
 
 import (
   "fmt"
+  "io"
   "net/http"
   "os"
 )
@@ -14,9 +15,5 @@ func main() {
     os.Exit(1)
   }
 
-  // make a byte slice with 99,999 seats inside it
-  bs := make([]byte, 99999)
-  resp.Body.Read(bs)
-  // convert to string, otherwise we just gonna see numbers e.g. [60 33 100 ...]
-  fmt.Println(string(bs))
+  io.Copy(os.Stdout, resp.Body)
 }

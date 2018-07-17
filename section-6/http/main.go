@@ -19,9 +19,13 @@ func main() {
 
   lw := logWriter{}
 
-  // func Copy(dst Writer, src Reader) (written int64, err error)
-  // 'lw' implements Writer
-  // while 'resp.Body' implements Reader
+  // Copy source (src) to destination (dst).
+  // In other words, copy response body to stdout (using fmt.Println below).
+  // Function signature:
+  //   'func Copy(dst Writer, src Reader) (written int64, err error)'
+  // Where...
+  //   'lw' (destination) implements Writer, and
+  //   'resp.Body' (source) implements Reader
   io.Copy(lw, resp.Body)
 }
 
@@ -30,7 +34,7 @@ func (lw logWriter) Write(bs []byte) (int, error) {
   fmt.Println(string(bs))
 
   // print additional info to stdout
-  fmt.Println("Just wrote this many bytes:", len(bs))
+  fmt.Println("\nJust wrote this many bytes:", len(bs))
 
   // to satisfy the function signature of Writer
   return len(bs), nil

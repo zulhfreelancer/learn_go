@@ -15,5 +15,8 @@ func main() {
     os.Exit(1)
   }
 
+  // func Copy(dst Writer, src Reader) (written int64, err error)
+  // 'os.Stdout' implements Writer
+  // while 'resp.Body' implements Reader
   io.Copy(os.Stdout, resp.Body)
 }

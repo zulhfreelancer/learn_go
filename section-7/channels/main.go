@@ -20,9 +20,12 @@ func main() {
     go checkLink(link, c)
   }
 
-  // infinite loop
-  for {
-    go checkLink(<- c, c)
+  // Infinite loop.
+  // range line: Wait for channel (`c`) to return something and assign it to `link`.
+  // go checkLink line: then run child routine, passing the link that we've just received
+  // This loop syntax is equivalent with previous loop syntax.
+  for link := range c {
+    go checkLink(link, c)
   }
 }
 
